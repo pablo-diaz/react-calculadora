@@ -8,9 +8,9 @@ import Estado from "./Estado"
 
 const Calculadora = ({ }) => {
   const [estado, setEstado] = React.useState(Estado.obtenerEstadoInicial());
-  const [operacionEnCurso, setOperacionEnCurso] = React.useState("");
   const [enTransicion, setEnTransicion] = React.useState(false);
   const [reiniciar, setReiniciar] = React.useState(false);
+  const [funcionDeCalculo, setFuncionDeCalculo] = React.useState({ laFuncion: null });
 
   const digitoPresionado = otroDigito => {
     setEstado(Estado.obtenerEstadoAlAgregarDigito(estado, otroDigito, enTransicion, reiniciar));
@@ -20,38 +20,26 @@ const Calculadora = ({ }) => {
 
   const limpiarPantalla = () => {
     setEstado(Estado.obtenerEstadoInicial());
-    setOperacionEnCurso("");
+    setFuncionDeCalculo({ laFuncion: null });
     setEnTransicion(false);
     setReiniciar(false);
   };
 
   const calcularTotal = () => {
-    switch(operacionEnCurso) {
-      case "+": setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, (a,b) => a + b)); break;
-      case "-": setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, (a,b) => a - b)); break;
-      case "*": setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, (a,b) => a * b)); break;
-      case "/": setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, (a,b) => a / b)); break;
-      default: console.log(operacionEnCurso);
-    }
+    if(funcionDeCalculo.laFuncion)
+      setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, funcionDeCalculo.laFuncion));
   };
 
-  const operacionSolicitada = operacion => {
+  const operacionSolicitada = (operacion, funcionAEjecutar) => {
     calcularTotal();
-    setOperacionEnCurso(operacion);
+    setFuncionDeCalculo({ laFuncion: funcionAEjecutar });
     setEnTransicion(true);
     setReiniciar(operacion === "=");
   };
 
-  const operacionPresionada = operacion => {
-    switch(operacion) {
-      case "C": limpiarPantalla(); break;
-      case "=": operacionSolicitada(operacion); break;
-      case "+": operacionSolicitada(operacion); break;
-      case "-": operacionSolicitada(operacion); break;
-      case "*": operacionSolicitada(operacion); break;
-      case "/": operacionSolicitada(operacion); break;
-      default: console.log(operacion);
-    }
+  const operacionPresionada = (operacion, funcionAEjecutar) => {
+    if(operacion === "C") limpiarPantalla();
+    else operacionSolicitada(operacion, funcionAEjecutar);
   };
 
   return (

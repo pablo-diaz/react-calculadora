@@ -13,7 +13,7 @@ const Operaciones = ({ operacionPresionada }) => {
   const alUsarOperacion = operacionUsada => {
     const [_, funcionAEjecutar] = operaciones
                              .find(([operacion, _]) => operacion === operacionUsada);
-    operacionPresionada(operacionUsada, funcionAEjecutar);
+    operacionPresionada(funcionAEjecutar);
   };
 
   return operaciones.map(([operacion, _]) =>

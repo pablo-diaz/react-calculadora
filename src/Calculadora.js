@@ -3,6 +3,7 @@ import React from "react";
 import Pantalla from "./Pantalla"
 import Numeros from "./Numeros"
 import Operaciones from "./Operaciones"
+import Controles from "./Controles";
 
 import Estado from "./Estado"
 
@@ -28,25 +29,28 @@ const Calculadora = ({ }) => {
   const calcularTotal = () => {
     if(funcionDeCalculo.laFuncion)
       setEstado(Estado.obtenerEstadoParaResultadoOperacion(estado, funcionDeCalculo.laFuncion));
+    setFuncionDeCalculo({ laFuncion: null });
   };
 
-  const operacionSolicitada = (operacion, funcionAEjecutar) => {
+  const operacionSolicitada = (_, funcionAEjecutar) => {
     calcularTotal();
     setFuncionDeCalculo({ laFuncion: funcionAEjecutar });
     setEnTransicion(true);
-    setReiniciar(operacion === "=");
+    setReiniciar(false);
   };
 
-  const operacionPresionada = (operacion, funcionAEjecutar) => {
-    if(operacion === "C") limpiarPantalla();
-    else operacionSolicitada(operacion, funcionAEjecutar);
+  const totalizar = () => {
+    calcularTotal();
+    setEnTransicion(true);
+    setReiniciar(true);
   };
 
   return (
     <>
       <Pantalla valor={estado.mostrar} />
       <Numeros digitoPresionado={digitoPresionado} />
-      <Operaciones botonPresionado={operacionPresionada} />
+      <Operaciones operacionPresionada={operacionSolicitada} />
+      <Controles limpiarFn={limpiarPantalla} totalFn={totalizar} />
     </>
   );
 };

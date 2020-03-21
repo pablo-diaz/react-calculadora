@@ -1,7 +1,7 @@
 import React from "react";
 
-import Boton from "./Boton"
-import Utils from "./utils"
+import Boton from "../boton/Boton"
+import Utils from "../../utileria/utils"
 
 const Numeros = ({ digitoPresionado }) => {
   const botonPresionado = textoBoton => {

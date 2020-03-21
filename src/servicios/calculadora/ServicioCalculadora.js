@@ -1,6 +1,6 @@
 import React from "react";
 
-import Estado from "./Estado";
+import Estado from "../../utileria/Estado";
 
 const servicio = () => {
   const [estado, setEstado] = React.useState(Estado.obtenerEstadoInicial());

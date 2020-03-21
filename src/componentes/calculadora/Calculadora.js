@@ -1,11 +1,11 @@
 import React from "react";
 
-import Pantalla from "./Pantalla";
-import Numeros from "./Numeros";
-import Operaciones from "./Operaciones";
-import Controles from "./Controles";
+import Pantalla from "../pantalla/Pantalla";
+import Numeros from "../numeros/Numeros";
+import Operaciones from "../operaciones/Operaciones";
+import Controles from "../controles/Controles";
 
-import ServicioCalculadora from "./ServicioCalculadora";
+import ServicioCalculadora from "../../servicios/calculadora/ServicioCalculadora";
 
 const Calculadora = ({ }) => {
   const servicio = ServicioCalculadora.servicio();

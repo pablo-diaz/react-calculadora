@@ -1,6 +1,6 @@
 import React from "react";
 
-import Boton from "./Boton"
+import Boton from "../boton/Boton"
 
 const Operaciones = ({ operacionPresionada }) => {
   const operaciones = [

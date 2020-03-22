@@ -129,6 +129,16 @@ test('al realizar operacion de division, el resultado es calculado adecuadamente
     expect(resultado).toBe(6);
 });
 
+test('al realizar operacion larga, el resultado es calculado adecuadamente', () => {
+    const { result } = renderHook(() => ServicioCalculadora.servicio());
+
+    let textoOperacion = "100+20-50+30+10";
+    operar(result, textoOperacion);
+    
+    let resultado = result.current.obtenerValorAMostrar();
+    expect(resultado).toBe(110);
+});
+
 const presionarDigito = (result, digito) => {
     act(() => {
         result.current.alPresionarDigito(digito);

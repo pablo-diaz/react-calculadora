@@ -14,6 +14,11 @@ const obtenerFuncionParaOperacion = operacionSolicitada => {
   return resultado[1];
 };
 
+const obtenerTituloParaOperacion = operacionSolicitada => {
+  const resultado = operaciones.find(([operacion, _1, _2]) => operacion === operacionSolicitada);
+  return resultado[2];
+};
+
 const Operaciones = ({ operacionPresionada }) => {
   const alUsarOperacion = operacionUsada => {
     const funcionAEjecutar = obtenerFuncionParaOperacion(operacionUsada);
@@ -30,5 +35,6 @@ const Operaciones = ({ operacionPresionada }) => {
 
 export default {
   Operaciones,
-  obtenerFuncionParaOperacion
+  obtenerFuncionParaOperacion,
+  obtenerTituloParaOperacion
 };

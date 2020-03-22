@@ -29,7 +29,7 @@ const Operaciones = ({ operacionPresionada }) => {
   return (
     <Grid container spacing={3}>
       { operaciones.map(([operacion, _, textoBoton]) =>
-          <Grid item xs={12}>
+          <Grid key={`operaciones-grid-${operacion}`} item xs={12}>
             <Boton
               key={textoBoton}
               texto={operacion}

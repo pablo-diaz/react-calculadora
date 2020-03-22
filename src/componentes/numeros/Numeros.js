@@ -12,7 +12,7 @@ const Numeros = ({ digitoPresionado }) => {
     <Grid container spacing={3}>
       { 
         [7, 8, 9, 4, 5, 6, 1, 2, 3, 0].map(digito =>
-          <Grid item xs={4} spacing={3}>
+          <Grid key={`numeros-grid-${digito}`} item xs={4}>
             <Boton key={digito}
                   texto={digito}
                   titulo={digito}

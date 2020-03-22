@@ -1,7 +1,7 @@
 import React from "react";
 
 const Pantalla = ({ valor }) => {
-  return <input type="number" defaultValue={valor} />;
+  return <input data-testid="pantalla" aria-label="pantalla" type="number" defaultValue={valor} />;
 };
 
 export default Pantalla;

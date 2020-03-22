@@ -1,10 +1,20 @@
 import React from "react";
+import Button from "@material-ui/core/Button";
 
-const Boton = ({ texto, onClick, titulo }) => {
+const Boton = ({ texto, onClick, titulo, tipo }) => {
     const clickHandler = () => onClick(texto);
-    return <button data-testid={`boton-${titulo}`} 
+
+    const looksPorTipo = {
+        operacion: { color: "primary", variant: "contained" },
+        control: { color: "secondary", variant: "contained" },
+        digito: { color: "primary", variant: "outlined" }
+    };
+
+    return <Button data-testid={`boton-${titulo}`} 
                    aria-label={`boton-${titulo}`}
-                   onClick={clickHandler}>{texto}</button>;
+                   color={looksPorTipo[tipo].color}
+                   variant={looksPorTipo[tipo].variant}
+                   onClick={clickHandler}>{texto}</Button>;
 };
 
 export default Boton;

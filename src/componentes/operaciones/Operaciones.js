@@ -30,6 +30,7 @@ const Operaciones = ({ operacionPresionada }) => {
       key={textoBoton}
       texto={operacion}
       titulo={textoBoton}
+      tipo="operacion"
       onClick={alUsarOperacion} />);
 };
 

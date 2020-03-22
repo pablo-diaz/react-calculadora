@@ -8,7 +8,7 @@ const Numeros = ({ digitoPresionado }) => {
     digitoPresionado(parseInt(textoBoton));
   };
 
-  return Utils.rango(0, 9).map(digito => <Boton key={digito} texto={digito} titulo={digito} onClick={botonPresionado} />);
+  return Utils.rango(0, 9).map(digito => <Boton key={digito} texto={digito} titulo={digito} tipo="digito" onClick={botonPresionado} />);
 };
 
 export default Numeros;

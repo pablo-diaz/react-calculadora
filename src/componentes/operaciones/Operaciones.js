@@ -2,17 +2,21 @@ import React from "react";
 
 import Boton from "../boton/Boton"
 
-const Operaciones = ({ operacionPresionada }) => {
-  const operaciones = [
-    ["+", (a, b) => a + b],
-    ["-", (a, b) => a - b],
-    ["*", (a, b) => a * b],
-    ["/", (a, b) => a / b]
-  ];
+const operaciones = [
+  ["+", (a, b) => a + b],
+  ["-", (a, b) => a - b],
+  ["*", (a, b) => a * b],
+  ["/", (a, b) => a / b]
+];
 
+const obtenerFuncionParaOperacion = operacionSolicitada => {
+  const resultado = operaciones.find(([operacion, _]) => operacion === operacionSolicitada);
+  return resultado[1];
+};
+
+const Operaciones = ({ operacionPresionada }) => {
   const alUsarOperacion = operacionUsada => {
-    const [_, funcionAEjecutar] = operaciones
-                             .find(([operacion, _]) => operacion === operacionUsada);
+    const funcionAEjecutar = obtenerFuncionParaOperacion(operacionUsada);
     operacionPresionada(funcionAEjecutar);
   };
 
@@ -23,4 +27,7 @@ const Operaciones = ({ operacionPresionada }) => {
       onClick={alUsarOperacion} />);
 };
 
-export default Operaciones;
+export default {
+  Operaciones,
+  obtenerFuncionParaOperacion
+};

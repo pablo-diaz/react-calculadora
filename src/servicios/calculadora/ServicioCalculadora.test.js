@@ -1,5 +1,6 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 import ServicioCalculadora from "./ServicioCalculadora"
+import Ops from "../../componentes/operaciones/Operaciones";
 
 test('al iniciar servicio, el valor a mostrar debe ser el por defecto', () => {
     const { result } = renderHook(() => ServicioCalculadora.servicio());
@@ -88,6 +89,46 @@ test('al presionar limpiar, se debe mostrar el valor por defecto', () => {
     expect(resultado).toBe(0);
 });
 
+test('al realizar operacion de suma, el resultado es calculado adecuadamente', () => {
+    const { result } = renderHook(() => ServicioCalculadora.servicio());
+
+    let textoOperacion = "12+8";
+    operar(result, textoOperacion);
+    
+    let resultado = result.current.obtenerValorAMostrar();
+    expect(resultado).toBe(20);
+});
+
+test('al realizar operacion de resta, el resultado es calculado adecuadamente', () => {
+    const { result } = renderHook(() => ServicioCalculadora.servicio());
+
+    let textoOperacion = "12-8";
+    operar(result, textoOperacion);
+    
+    let resultado = result.current.obtenerValorAMostrar();
+    expect(resultado).toBe(4);
+});
+
+test('al realizar operacion de multiplicacion, el resultado es calculado adecuadamente', () => {
+    const { result } = renderHook(() => ServicioCalculadora.servicio());
+
+    let textoOperacion = "12*2";
+    operar(result, textoOperacion);
+    
+    let resultado = result.current.obtenerValorAMostrar();
+    expect(resultado).toBe(24);
+});
+
+test('al realizar operacion de division, el resultado es calculado adecuadamente', () => {
+    const { result } = renderHook(() => ServicioCalculadora.servicio());
+
+    let textoOperacion = "12/2";
+    operar(result, textoOperacion);
+    
+    let resultado = result.current.obtenerValorAMostrar();
+    expect(resultado).toBe(6);
+});
+
 const presionarDigito = (result, digito) => {
     act(() => {
         result.current.alPresionarDigito(digito);
@@ -110,4 +151,20 @@ const presionarLimpiar = result => {
     act(() => {
         result.current.limpiar();
     });
+};
+
+const operar = (result, textoOperacion) => {
+    for (let i = 0; i < textoOperacion.length; i++) {
+        let simbolo = textoOperacion.charAt(i);
+        let posibleDigito = parseInt(simbolo);
+        if(Number.isInteger(posibleDigito))
+            presionarDigito(result, posibleDigito);
+        else {
+            let laFuncion = Ops.obtenerFuncionParaOperacion(simbolo);
+            if(laFuncion)
+                presionarOperacion(result, laFuncion);
+        }
+    }
+
+    presionarTotalizar(result);
 };

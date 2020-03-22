@@ -1,4 +1,5 @@
 import React from "react";
+import Grid from '@material-ui/core/Grid';
 
 import Boton from "../boton/Boton"
 
@@ -25,13 +26,21 @@ const Operaciones = ({ operacionPresionada }) => {
     operacionPresionada(funcionAEjecutar);
   };
 
-  return operaciones.map(([operacion, _, textoBoton]) =>
-    <Boton
-      key={textoBoton}
-      texto={operacion}
-      titulo={textoBoton}
-      tipo="operacion"
-      onClick={alUsarOperacion} />);
+  return (
+    <Grid container spacing={3}>
+      { operaciones.map(([operacion, _, textoBoton]) =>
+          <Grid item xs={12}>
+            <Boton
+              key={textoBoton}
+              texto={operacion}
+              titulo={textoBoton}
+              tipo="operacion"
+              onClick={alUsarOperacion} />
+          </Grid>
+        )
+      }
+    </Grid>
+  );
 };
 
 export default {

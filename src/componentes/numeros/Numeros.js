@@ -1,14 +1,28 @@
 import React from "react";
+import Grid from '@material-ui/core/Grid';
 
 import Boton from "../boton/Boton"
-import Utils from "../../utileria/utils"
 
 const Numeros = ({ digitoPresionado }) => {
   const botonPresionado = textoBoton => {
     digitoPresionado(parseInt(textoBoton));
   };
 
-  return Utils.rango(0, 9).map(digito => <Boton key={digito} texto={digito} titulo={digito} tipo="digito" onClick={botonPresionado} />);
+  return (
+    <Grid container spacing={3}>
+      { 
+        [7, 8, 9, 4, 5, 6, 1, 2, 3, 0].map(digito =>
+          <Grid item xs={4} spacing={3}>
+            <Boton key={digito}
+                  texto={digito}
+                  titulo={digito}
+                  tipo="digito"
+                  onClick={botonPresionado} />
+          </Grid>
+        )
+      }
+    </Grid>
+  );
 };
 
 export default Numeros;

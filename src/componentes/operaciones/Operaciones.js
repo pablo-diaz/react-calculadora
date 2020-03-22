@@ -3,14 +3,14 @@ import React from "react";
 import Boton from "../boton/Boton"
 
 const operaciones = [
-  ["+", (a, b) => a + b],
-  ["-", (a, b) => a - b],
-  ["*", (a, b) => a * b],
-  ["/", (a, b) => a / b]
+  ["+", (a, b) => a + b, "suma"],
+  ["-", (a, b) => a - b, "resta"],
+  ["*", (a, b) => a * b, "multiplicacion"],
+  ["/", (a, b) => a / b, "division"]
 ];
 
 const obtenerFuncionParaOperacion = operacionSolicitada => {
-  const resultado = operaciones.find(([operacion, _]) => operacion === operacionSolicitada);
+  const resultado = operaciones.find(([operacion, _1, _2]) => operacion === operacionSolicitada);
   return resultado[1];
 };
 
@@ -20,10 +20,11 @@ const Operaciones = ({ operacionPresionada }) => {
     operacionPresionada(funcionAEjecutar);
   };
 
-  return operaciones.map(([operacion, _]) =>
+  return operaciones.map(([operacion, _, textoBoton]) =>
     <Boton
-      key={operacion}
+      key={textoBoton}
       texto={operacion}
+      titulo={textoBoton}
       onClick={alUsarOperacion} />);
 };
 

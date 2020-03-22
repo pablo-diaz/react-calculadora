@@ -1,9 +1,9 @@
 import React from "react";
 
-const Boton = ({ texto, onClick }) => {
+const Boton = ({ texto, onClick, titulo }) => {
     const clickHandler = () => onClick(texto);
-    return <button data-testid={`boton-${texto}`} 
-                   aria-label={`boton-${texto}`}
+    return <button data-testid={`boton-${titulo}`} 
+                   aria-label={`boton-${titulo}`}
                    onClick={clickHandler}>{texto}</button>;
 };
 
